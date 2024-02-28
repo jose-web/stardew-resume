@@ -7,4 +7,7 @@ import vue from "@astrojs/vue";
 export default defineConfig({
   integrations: [tailwind(), vue()],
   base: '/stardew-resume',
+  build: {
+    assets: 'assets'
+  }
 });
