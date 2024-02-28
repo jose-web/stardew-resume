@@ -20,4 +20,4 @@ jobs:
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: dist/browser # The folder the action should deploy.
+          folder: dist/stardew-resume/browser # The folder the action should deploy.
