@@ -1,9 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import FileReader from '../components/fileReader/FileReader.vue';
 ---
 
 <Layout title="Welcome to Astro.">
-	<input type="file" id="inputFile">
+	<FileReader client:visible />
 </Layout>
-
-<script is:inline src="/file-reader.js"></script>

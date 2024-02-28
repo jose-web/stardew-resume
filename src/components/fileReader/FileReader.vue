@@ -1,12 +1,20 @@
-window.onload = () => {
-    const inputFile = document.querySelector('#inputFile');
-    
-    inputFile.addEventListener('change', (event) => {
-        fileUploaded(event)
-    })
-}
+<template>
+    <input type="file" id="inputFile" @change="onChange($event)">
+    {{saveGame.player?.name}}
+</template>
 
-function fileUploaded(event) {
+<script>
+import { ref } from 'vue';
+
+export default {
+  setup() {
+    const onChange = (event) => {
+      fileUploaded(event)
+    }
+
+    let saveGame = ref({})
+
+    function fileUploaded(event) {
     let file = event.target.files[0]
     let reader = new FileReader()
     reader.readAsText(file)
@@ -16,10 +24,8 @@ function fileUploaded(event) {
         try {
             let xmlInfo = new DOMParser().parseFromString(reader.result, 'application/xml')
             let jsonInfo = xml2json(xmlInfo)
-            let saveGame = jsonInfo.SaveGame
-
-            console.log(saveGame);
             
+            saveGame.value.player = jsonInfo.SaveGame.player            
         } catch (e) {
             console.error("Error parsing XML:", e);
         }
@@ -54,3 +60,11 @@ function xml2json(xml) {
       console.log(e.message);
   }
 }
+
+    return {
+      onChange,
+      saveGame,
+    }
+  }
+}
+</script>
