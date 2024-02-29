@@ -1,0 +1,19 @@
+@if(info){
+    {{info.player.name}}
+    {{info.year}}
+    {{info.player.farmName}}
+
+    <br>
+
+    Inventario:
+
+    @for (item of info.player.items.Item; track $index) {
+        <div>
+            {{$index}}: {{item.DisplayName}} - {{item.Stack}}
+        </div>
+    }
+} @else {
+    <div>
+        No hay información
+    </div>
+}

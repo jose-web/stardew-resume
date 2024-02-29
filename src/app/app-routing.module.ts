@@ -6,8 +6,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
+import { GameInfoComponent } from '../pages/game-info/game-info.component';
+
 const routes: Routes = [
   { path: '', component: FileReaderComponent },
+  { path: 'game-info', component: GameInfoComponent },
+
   { path: '**', redirectTo: '' }
 ];
 
@@ -19,7 +23,8 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
   declarations: [
-    FileReaderComponent
+    FileReaderComponent,
+    GameInfoComponent,
   ]
 })
 export class AppRoutingModule { }

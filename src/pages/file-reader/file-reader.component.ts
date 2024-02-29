@@ -20,7 +20,9 @@ export class FileReaderComponent {
       try {
         let xmlInfo = new DOMParser().parseFromString(reader.result as any, 'application/xml')
         let jsonInfo = this.xml2json(xmlInfo)
-        console.log(jsonInfo.SaveGame);
+
+        sessionStorage.setItem("saveGames", JSON.stringify(jsonInfo))
+        this.router.navigate(['/game-info'])
       } catch (e) {
         console.error("Error parsing XML:", e);
       }
