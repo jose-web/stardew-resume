@@ -21,6 +21,8 @@ export class HeaderComponent {
 
   public money = 0
 
+  public goldenWalnuts = 0
+
   public season = ['Spring', 'Summer', 'Fall', 'Winter']
 
   constructor(
@@ -35,5 +37,6 @@ export class HeaderComponent {
     this.time.day = Number(info.player.dayOfMonthForSaveGame)
     this.time.season = Number(info.player.seasonForSaveGame)
     this.time.year = Number(info.player.yearForSaveGame)
+    this.goldenWalnuts = Number(info.goldenWalnuts)
   }
 }

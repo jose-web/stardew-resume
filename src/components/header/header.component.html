@@ -2,13 +2,18 @@
     {{farmName}} Farm | {{username}}
 
     <div class="flex justify-center items-center ml-auto">
-        <img src="https://stardewvalleywiki.com/mediawiki/images/thumb/7/70/Time_Icon.png/24px-Time_Icon.png"
+        <img class="h-4 pixelated" src="https://stardewvalleywiki.com/mediawiki/images/thumb/7/70/Time_Icon.png/24px-Time_Icon.png"
             alt="reloj">
         {{time.day}} de {{season[time.season]}} del año {{time.year}}
     </div>
 
     <div class="flex justify-center items-center ml-auto">
-        <img src="https://stardewvalleywiki.com/mediawiki/images/thumb/1/10/Gold.png/18px-Gold.png" alt="moneda">
+        <img class="h-4 pixelated" src="https://stardewvalleywiki.com/mediawiki/images/thumb/5/54/Golden_Walnut.png/32px-Golden_Walnut.png" alt="moneda">
+        {{ goldenWalnuts | number:'1.0-0' }}
+    </div>
+
+    <div class="flex justify-center items-center ml-auto">
+        <img class="h-4 pixelated" src="https://stardewvalleywiki.com/mediawiki/images/thumb/1/10/Gold.png/18px-Gold.png" alt="moneda">
         {{ money | number:'1.0-0' }} g
     </div>
 </div>
