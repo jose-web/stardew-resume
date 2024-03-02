@@ -1,12 +1,32 @@
 <section class="grid grid-cols-2 gap-2 p-2">
     <section class="bg-orange border-brown border-4 p-2">
         <h2 class="underline">Missions</h2>
-    
+
         @for (quest of quests; track $index) {
         <article>
-            <p class="font-bold">{{quest._questTitle}}</p>
+            @if (quest.target){
+            <img class="w-7 h-7 pixelated" [src]="'https://upload.farm/static/assets/npc_icon/'+quest.target+'.png'"
+                alt="" [title]="quest.target" loading="lazy">
+            }
+            <p class="font-bold">{{quest._questTitle}}:</p>
             <p> {{quest._questDescription}}</p>
         </article>
         }
+    </section>
+
+    <section class="bg-orange border-brown border-4 p-2">
+        <h2 class="underline">Social</h2>
+
+        <section class="grid grid-cols-2">
+            @for (friend of social; track $index) {
+            <article>
+                <img class="w-7 h-7 pixelated"
+                    [src]="'https://upload.farm/static/assets/npc_icon/'+friend.key.string+'.png'" alt=""
+                    [title]="friend.key.string" loading="lazy">
+                <p class="font-bold">{{friend.key.string}}:{{friend.value.Friendship.Status}}</p>
+                <p>Points: {{friend.value.Friendship.Points}}</p>
+            </article>
+            }
+        </section>
     </section>
 </section>
