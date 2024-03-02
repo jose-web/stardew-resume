@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { SaveGame, TentacledItem } from '../../type/SaveGame';
+import { Quest, SaveGame } from '../../type/SaveGame';
 
 @Component({
   templateUrl: './game-info.component.html',
@@ -8,13 +8,16 @@ import { SaveGame, TentacledItem } from '../../type/SaveGame';
 })
 export class GameInfoComponent {
 
-  public info: SaveGame | null = null
+  public quests: Quest[] = []
 
   constructor(
     private router: Router,
-  ) { }
+  ) {
+   
+  }
 
   ngOnInit() {
-    this.info = JSON.parse(sessionStorage.getItem("saveGames")!).SaveGame 
+    let info: SaveGame = JSON.parse(sessionStorage.getItem("saveGames")!).SaveGame
+    this.quests = info.player.questLog.Quest
   }
 }

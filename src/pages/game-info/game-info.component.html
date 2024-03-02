@@ -1,19 +1,12 @@
-@if(info){
-    {{info.player.name}}
-    {{info.year}}
-    {{info.player.farmName}}
-
-    <br>
-
-    Inventario:
-
-    @for (item of info.player.items.Item; track $index) {
-        <div>
-            {{$index}}: {{item.DisplayName}} - {{item.Stack}}
-        </div>
-    }
-} @else {
-    <div>
-        No hay información
-    </div>
-}
+<section class="grid grid-cols-2 gap-2 p-2">
+    <section class="bg-orange border-brown border-4 p-2">
+        <h2 class="underline">Missions</h2>
+    
+        @for (quest of quests; track $index) {
+        <article>
+            <p class="font-bold">{{quest._questTitle}}</p>
+            <p> {{quest._questDescription}}</p>
+        </article>
+        }
+    </section>
+</section>
