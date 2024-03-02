@@ -15,16 +15,26 @@
     </section>
 
     <section class="bg-orange border-brown border-4 p-2">
-        <h2 class="underline">Social</h2>
+        <a class="underline" routerLink="/social">Social</a>
 
-        <section class="grid grid-cols-2">
+        <section class="grid grid-cols-3 gap-3">
             @for (friend of social; track $index) {
-            <article>
+            <article class="flex">
+
                 <img class="w-7 h-7 pixelated"
                     [src]="'https://upload.farm/static/assets/npc_icon/'+friend.key.string+'.png'" alt=""
                     [title]="friend.key.string" loading="lazy">
-                <p class="font-bold">{{friend.key.string}}:{{friend.value.Friendship.Status}}</p>
-                <p>Points: {{friend.value.Friendship.Points}}</p>
+                <div class="flex flex-col">
+                    <p class="font-bold">{{friend.key.string}}</p>
+
+                    <p class="flex items-center">{{friend.value.Friendship.Points/274.9 | number:'1.0-0'}}/10 <img
+                            class="w-4 h-4 pixelated"
+                            src="https://stardewcommunitywiki.com/mediawiki/images/thumb/0/04/HeartIconLarge.png/18px-HeartIconLarge.png"
+                            alt=""></p>
+                    <!-- <p>{{friend.value.Friendship.Status}}</p>
+                    <p>Points: {{friend.value.Friendship.Points}}</p> -->
+
+                </div>
             </article>
             }
         </section>

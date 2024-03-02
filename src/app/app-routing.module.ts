@@ -9,6 +9,7 @@ import { MainPageComponent } from '../pages/main-page/main-page.component';
 import { HeaderComponent } from '../components/header/header.component';
 import { FileReaderComponent } from '../pages/file-reader/file-reader.component';
 import { GameInfoComponent } from '../pages/game-info/game-info.component';
+import { SocialComponent } from '../pages/social/social.component';
 
 const routes: Routes = [
   { path: '', component: FileReaderComponent, pathMatch: 'full' },
@@ -17,6 +18,7 @@ const routes: Routes = [
     path: '', component: MainPageComponent,
     children: [
       { path: 'game-info', component: GameInfoComponent },
+      { path: 'social', component: SocialComponent }
     ]
   },
 
@@ -35,6 +37,7 @@ const routes: Routes = [
     HeaderComponent,
     FileReaderComponent,
     GameInfoComponent,
+    SocialComponent,
   ]
 })
 export class AppRoutingModule { }

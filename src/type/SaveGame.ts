@@ -1923,7 +1923,7 @@ export interface MagentaValue {
 }
 
 export interface Friendship {
-    Points:           string;
+    Points:           number;
     GiftsThisWeek:    string;
     GiftsToday:       string;
     LastGiftDate?:    LastGiftDate;
