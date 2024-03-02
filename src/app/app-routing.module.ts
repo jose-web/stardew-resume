@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 
 import { MainPageComponent } from '../pages/main-page/main-page.component';
 import { HeaderComponent } from '../components/header/header.component';
+import { FooterComponent } from '../components/footer/footer.component';
 import { FileReaderComponent } from '../pages/file-reader/file-reader.component';
 import { GameInfoComponent } from '../pages/game-info/game-info.component';
 import { SocialComponent } from '../pages/social/social.component';
@@ -33,8 +34,7 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
   declarations: [
-    MainPageComponent,
-    HeaderComponent,
+    MainPageComponent, HeaderComponent, FooterComponent,
     FileReaderComponent,
     GameInfoComponent,
     SocialComponent,
