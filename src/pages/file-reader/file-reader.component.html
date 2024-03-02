@@ -1,1 +1,11 @@
-<input type="file" (change)="fileUploaded($event)" name="" id="">
+<main class="relative min-h-svh w-full justify-center flex flex-col">
+    <input
+        class="opacity-0 absolute top-0 left-0 w-full h-full cursor-pointer"
+        type="file" 
+        (change)="fileUploaded($event)"
+    >
+    <img src="/assets/logo.png" class="m-auto" alt="">
+    <div class="m-auto">
+            drop file
+    </div>
+</main>
