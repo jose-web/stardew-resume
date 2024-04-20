@@ -1,0 +1,15 @@
+<h2 class="m-2 border-brown border-4 bg-orange text-center uppercase">Farm map</h2>
+
+<section class="relative bg-orange border-brown border-4 m-2">
+
+    <img [src]="farmType" class="relative w-full h-auto pixelated">
+
+    <!-- BUILDINGS -->
+    @for (building of buildings; track $index) {
+    <div class="absolute" [style]="calculatePosition(building.width, building.tileX, building.tileY)">
+        <img [src]="'/assets/building/' + building.buildingType + '.png'" [alt]="building.buildingType"
+            class="absolute w-full h-auto pixelated bottom-0">
+    </div>
+    }
+
+</section>

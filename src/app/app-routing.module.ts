@@ -11,6 +11,7 @@ import { FooterComponent } from '../components/footer/footer.component';
 import { FileReaderComponent } from '../pages/file-reader/file-reader.component';
 import { GameInfoComponent } from '../pages/game-info/game-info.component';
 import { SocialComponent } from '../pages/social/social.component';
+import { FarmMapComponent } from '../pages/farm-map/farm-map.component';
 
 const routes: Routes = [
   { path: '', component: FileReaderComponent, pathMatch: 'full' },
@@ -19,7 +20,8 @@ const routes: Routes = [
     path: '', component: MainPageComponent,
     children: [
       { path: 'game-info', component: GameInfoComponent },
-      { path: 'social', component: SocialComponent }
+      { path: 'social', component: SocialComponent },
+      { path: 'farm-map', component: FarmMapComponent },
     ]
   },
 
@@ -38,6 +40,7 @@ const routes: Routes = [
     FileReaderComponent,
     GameInfoComponent,
     SocialComponent,
+    FarmMapComponent,
   ]
 })
 export class AppRoutingModule { }
