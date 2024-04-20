@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FriendshipDataItem, Quest, SaveGame } from '../../type/SaveGame';
 
 @Component({
+  selector: 'app-game-info',
   templateUrl: './game-info.component.html',
   styleUrl: './game-info.component.scss',
 })

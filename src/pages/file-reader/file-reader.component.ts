@@ -1,7 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
+  selector: 'app-file-reader',
   templateUrl: './file-reader.component.html',
   styleUrl: './file-reader.component.scss',
 })
@@ -9,7 +11,25 @@ export class FileReaderComponent {
 
   constructor(
     private router: Router,
-  ) { }
+    private http: HttpClient,
+  ) {
+    this.saveGamesByDefault()
+  }
+
+  saveGamesByDefault() {
+    if (sessionStorage.getItem("saveGames") == null) {
+      this.http.get("/assets/VILLADORITA_300816129", { responseType: "text" })
+        .subscribe({
+          next: (data: any) => {
+            let xmlInfo = new DOMParser().parseFromString(data, 'application/xml')
+            let jsonInfo = this.xml2json(xmlInfo)
+            sessionStorage.setItem("saveGames", JSON.stringify(jsonInfo))
+
+            location.reload()
+          }
+        })
+    }
+  }
 
   fileUploaded(event: any) {
     let file = event.target.files[0]

@@ -14,11 +14,10 @@ import { SocialComponent } from '../pages/social/social.component';
 import { FarmMapComponent } from '../pages/farm-map/farm-map.component';
 
 const routes: Routes = [
-  { path: '', component: FileReaderComponent, pathMatch: 'full' },
-
   {
     path: '', component: MainPageComponent,
     children: [
+      { path: '', component: GameInfoComponent },
       { path: 'game-info', component: GameInfoComponent },
       { path: 'social', component: SocialComponent },
       { path: 'farm-map', component: FarmMapComponent },
