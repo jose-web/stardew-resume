@@ -12,4 +12,12 @@
     </div>
     }
 
+    <!-- ITEMS -->
+    @for (item of items; track $index) {
+    <div class="absolute" [style]="calculatePosition(item.width, item.tileX, item.tileY)">
+        <img [src]="'/assets/item/' + item.buildingType + '.png'" [alt]="item.buildingType"
+            class="absolute w-full h-auto pixelated bottom-0">
+    </div>
+    }
+
 </section>

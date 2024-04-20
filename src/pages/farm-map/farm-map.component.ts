@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FriendshipDataItem, PurpleItem, Quest, SaveGame } from '../../type/SaveGame';
+import { PurpleItem, SaveGame } from '../../type/SaveGame';
 
 @Component({
   templateUrl: './farm-map.component.html',
@@ -9,6 +9,7 @@ export class FarmMapComponent {
 
   public farmType = ''
   public buildings: {buildingType: string, tileX: number, tileY:number, width: number}[] = []
+  public items: {buildingType: string, tileX: number, tileY:number, width: number}[] = []
 
   constructor() {}
 
@@ -18,13 +19,33 @@ export class FarmMapComponent {
         
     for (const iterator of info.locations.GameLocation[0].buildings?.Building!) {            
       this.buildings.push({
-        buildingType: iterator.buildingType.replace(' ', '_'),
+        buildingType: iterator.buildingType.replaceAll(' ', '_'),
         tileX: Number(iterator.tileX),
         tileY: Number(iterator.tileY) + Number(iterator.tilesHigh) -1 ,
         width: Number(iterator.tilesWide),
       })
     }
-  
+
+    if (typeof info.locations.GameLocation[0].objects === 'object') {
+      for (const iterator of info.locations.GameLocation[0].objects.item as PurpleItem[]) {
+
+        this.items.push({
+          buildingType: iterator.value.Object.name.replaceAll(' ', '_').replace('Rarecrow', 'Scarecrow'),
+          tileX: Number(iterator.value.Object.tileLocation.X),
+          tileY: Number(iterator.value.Object.tileLocation.Y),
+          width: 1,
+        })
+
+        // if(iterator.value.Object.name == 'Stone Fence' ){
+        //   console.log(iterator);
+        // }
+
+        // if(iterator.value.Object.name == 'Rarecrow' ){
+        //   console.log((iterator.value.Object as any).itemId);
+        // }
+      }
+    }
+    
   }
 
   getFarmType(info: SaveGame){
