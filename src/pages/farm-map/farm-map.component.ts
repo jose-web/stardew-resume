@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { PurpleItem, SaveGame } from '../../type/SaveGame';
 
 @Component({
+  selector: 'app-farm-map',
   templateUrl: './farm-map.component.html',
   styleUrl: './farm-map.component.scss',
 })
