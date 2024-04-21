@@ -16,7 +16,8 @@ jobs:
         run: |
           npm install
           npm run build
-          curl https://github.com/jose-web/primera-partida-stardew/blob/master/VILLADORITA_300816129 > dist/stardew-resume/browser/assets/VILLADORITA_300816129
+          git clone https://github.com/jose-web/primera-partida-stardew
+          mv primera-partida-stardew/VILLADORITA_300816129 dist/stardew-resume/browser/assets/VILLADORITA_300816129
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4

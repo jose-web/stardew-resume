@@ -18,7 +18,7 @@ export class FileReaderComponent {
 
   saveGamesByDefault() {
     if (sessionStorage.getItem("saveGames") == null) {
-      this.http.get("/assets/VILLADORITA_300816129", { responseType: "text" })
+      this.http.get("/stardew-resume/assets/VILLADORITA_300816129", { responseType: "text" })
         .subscribe({
           next: (data: any) => {
             let xmlInfo = new DOMParser().parseFromString(data, 'application/xml')
