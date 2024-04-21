@@ -17,12 +17,17 @@ jobs:
           npm install
           npm run build
 
-      - name: Downloading the saveGame file 📂
+      - name: Checkout the saveGame repository 📂
         uses: actions/checkout@v4
         with:
           repository: jose-web/primera-partida-stardew
+          token: ${{ secrets.GH_PAT }} # `GH_PAT` is a secret that contains your PAT
+          ref: master
+          path: primera-partida-stardew
+
+      - name: Move the saveGame file 📂
         run: |
-          mv VILLADORITA_300816129 dist/stardew-resume/browser/assets/VILLADORITA_300816129
+          mv primera-partida-stardew/VILLADORITA_300816129 dist/stardew-resume/browser/assets/VILLADORITA_300816129
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
