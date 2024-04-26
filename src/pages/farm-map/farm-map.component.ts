@@ -11,6 +11,7 @@ export class FarmMapComponent {
   public farmType = ''
   public buildings: {buildingType: string, tileX: number, tileY:number, width: number}[] = []
   public items: {buildingType: string, tileX: number, tileY:number, width: number}[] = []
+  public origin = window.location.origin.includes('localhost') ? '' : "/stardew-resume/"
 
   constructor() {}
 
