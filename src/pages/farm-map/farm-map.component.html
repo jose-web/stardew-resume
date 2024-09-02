@@ -20,4 +20,12 @@
     </div>
     }
 
+    <!-- TERRAIN -->
+    @for (terrain of terrains; track $index) {
+    <div class="absolute" [style]="calculatePosition(terrain.width, terrain.tileX, terrain.tileY)">
+        <img [src]="origin+'/assets/' + terrain.buildingType + '.png'" [alt]="terrain.buildingType"
+            class="absolute w-full h-auto pixelated bottom-0">
+    </div>
+    }
+
 </section>

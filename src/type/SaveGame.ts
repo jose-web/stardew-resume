@@ -346,7 +346,7 @@ export interface GameLocation {
     objects:                      ObjectsObjects | string;
     resourceClumps:               Umps | string;
     largeTerrainFeatures:         LargeTerrainFeaturesClass | string;
-    terrainFeatures:              TerrainFeaturesClass | string;
+    terrainFeatures:              TerrainFeaturesClass;
     name:                         string;
     waterColor:                   Color;
     isFarm:                       string;
