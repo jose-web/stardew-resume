@@ -8,23 +8,23 @@
     @for (building of buildings; track $index) {
     <div class="absolute" [style]="calculatePosition(building.width, building.tileX, building.tileY)">
         <img [src]="origin+'/assets/building/' + building.buildingType + '.png'" [alt]="building.buildingType"
-            class="absolute w-full h-auto pixelated bottom-0">
+            [class]="'z-'+building.tileY+' absolute w-full h-auto pixelated bottom-0'">
     </div>
     }
 
     <!-- ITEMS -->
     @for (item of items; track $index) {
-    <div class="absolute" [style]="calculatePosition(item.width, item.tileX, item.tileY)">
+    <div [class]="'z-'+item.tileY+' absolute'" [style]="calculatePosition(item.width, item.tileX, item.tileY)">
         <img [src]="origin+'/assets/item/' + item.buildingType + '.png'" [alt]="item.buildingType"
-            class="absolute w-full h-auto pixelated bottom-0">
+            [class]="'z-'+item.tileY+' absolute w-full h-auto pixelated bottom-0'">
     </div>
     }
 
     <!-- TERRAIN -->
     @for (terrain of terrains; track $index) {
-    <div class="absolute" [style]="calculatePosition(terrain.width, terrain.tileX, terrain.tileY)">
+    <div [class]="'z-'+terrain.tileY+' absolute'" [style]="calculatePosition(terrain.width, terrain.tileX, terrain.tileY)">
         <img [src]="origin+'/assets/' + terrain.buildingType + '.png'" [alt]="terrain.buildingType"
-            class="absolute w-full h-auto pixelated bottom-0">
+            [class]="'z-'+terrain.tileY+' absolute w-full h-auto pixelated bottom-0'">
     </div>
     }
 
