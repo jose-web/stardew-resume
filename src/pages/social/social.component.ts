@@ -13,7 +13,10 @@ export class SocialComponent {
   constructor() {}
 
   ngOnInit() {
-    let info: SaveGame = JSON.parse(sessionStorage.getItem("saveGames")!).SaveGame
+    const raw = sessionStorage.getItem("saveGames");
+    if (!raw) return;
+
+    let info: SaveGame = JSON.parse(raw).SaveGame
     this.quests = info.player.questLog.Quest
     this.social = info.player.friendshipData.item
   }

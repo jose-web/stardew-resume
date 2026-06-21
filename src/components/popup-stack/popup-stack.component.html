@@ -1,0 +1,36 @@
+@for (entry of (stack$ | async) ?? []; track trackEntry(index, entry); let index = $index) {
+<div class="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4" [style.z-index]="40 + index * 10"
+    (click)="close(index)">
+
+    @if (entry.type === 'location') {
+    <div class="relative bg-lightbrown border-brown border-4 rounded-lg shadow-md w-[min(90vw,900px)] max-h-[90vh] flex flex-col p-2"
+        (click)="$event.stopPropagation()">
+        <button class="absolute top-2 right-2 z-20 bg-brown text-orange rounded-full w-6 h-6 leading-none hover:opacity-80" (click)="close(index)">✕</button>
+
+        <div class="relative flex-1 overflow-auto">
+            <app-farm-map [locationName]="entry.locationName" [popupMode]="true"></app-farm-map>
+        </div>
+    </div>
+    } @else {
+    <div class="relative bg-lightbrown border-brown border-4 rounded-lg shadow-md w-[min(90vw,420px)] max-h-[80vh] flex flex-col"
+        (click)="$event.stopPropagation()">
+        <div class="flex items-center gap-2 p-2 bg-orange border-brown border-b-4 rounded-t-md">
+            <h2 class="flex-1 text-center uppercase font-bold">{{'CHEST.TITLE' | translate}}</h2>
+            <button class="bg-brown text-orange rounded-full w-6 h-6 leading-none hover:opacity-80" (click)="close(index)">✕</button>
+        </div>
+
+        <div class="flex flex-col gap-1 p-2 overflow-y-auto">
+            @for (item of entry.chest.items; track $index) {
+            <div class="flex items-center gap-2 bg-orange border-brown border-2 rounded-md p-1">
+                <img class="w-6 h-6 pixelated shrink-0" [src]="itemSpriteUrl(item)" [alt]="item.name" (error)="onImageError($event)">
+                <span class="flex-1 truncate">{{item.name}}</span>
+                <span class="text-sm font-bold">x{{item.quantity}}</span>
+            </div>
+            } @empty {
+            <p class="text-center italic p-4">{{'CHEST.EMPTY' | translate}}</p>
+            }
+        </div>
+    </div>
+    }
+</div>
+}

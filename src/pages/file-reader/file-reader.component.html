@@ -1,3 +1,4 @@
+@if (!hasSave) {
 <main class="relative h-[70vh] w-full justify-center flex flex-col">
     <input class="opacity-0 absolute top-0 left-0 w-full h-[70vh] cursor-pointer" type="file"
         (change)="fileUploaded($event)">
@@ -5,8 +6,8 @@
     <img src="assets/logo.png" class="m-auto pixelated" alt="Stardew Valley Logo">
 
     <p class="text-center"><a href="%appdata%\StardewValley\Saves" target="_blank" rel="noopener noreferrer">%appdata%\StardewValley\Saves</a></p>
-    <div class="m-auto text-center p-1 border-4 border-brown bg-lightbrown">
-        <div class="bg-orange p-6">
+    <div class="m-auto text-center p-1 border-4 border-brown bg-lightbrown rounded-lg shadow-lg">
+        <div class="bg-orange p-6 rounded">
 
             <p class="w-10 inline-block">
                 <svg xmlns="http://www.w3.org/2000/svg"
@@ -16,9 +17,16 @@
                 </svg>
             </p>
 
-            <p>Drag & drop your farm file here</p>
-            <p> or <strong>browse file</strong> from device</p>
+            <p>{{'FILE_READER.DRAG_DROP' | translate}}</p>
+            <p>{{'FILE_READER.OR' | translate}} <strong>{{'FILE_READER.BROWSE' | translate}}</strong> {{'FILE_READER.FROM_DEVICE' | translate}}</p>
         </div>
     </div>
 
 </main>
+} @else {
+<div class="relative flex items-center justify-center gap-2 py-1.5 px-4 bg-lightbrown border-b-4 border-brown text-xs sm:text-sm hover:bg-orange transition-colors">
+    <input class="opacity-0 absolute inset-0 w-full h-full cursor-pointer" type="file" [title]="'FILE_READER.LOAD_ANOTHER_TITLE' | translate"
+        (change)="fileUploaded($event)">
+    <span>{{'FILE_READER.ANOTHER_SAVE_PREFIX' | translate}} <strong class="underline">{{'FILE_READER.CHOOSE_FILE' | translate}}</strong></span>
+</div>
+}

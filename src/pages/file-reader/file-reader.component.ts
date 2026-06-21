@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-file-reader',
@@ -9,8 +8,9 @@ import { Router } from '@angular/router';
 })
 export class FileReaderComponent {
 
+  public hasSave = sessionStorage.getItem('saveGames') != null;
+
   constructor(
-    private router: Router,
     private http: HttpClient,
   ) {
     this.saveGamesByDefault()
@@ -42,7 +42,7 @@ export class FileReaderComponent {
         let jsonInfo = this.xml2json(xmlInfo)
 
         sessionStorage.setItem("saveGames", JSON.stringify(jsonInfo))
-        this.router.navigate(['/game-info'])
+        location.reload()
       } catch (e) {
         console.error("Error parsing XML:", e);
       }

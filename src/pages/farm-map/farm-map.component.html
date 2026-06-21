@@ -1,31 +1,100 @@
-<h2 class="m-2 border-brown border-4 bg-orange text-center uppercase">Farm map</h2>
+<div class="flex items-center gap-2 m-2" [class.pr-8]="popupMode">
+    <h2 class="flex-1 border-brown border-4 bg-orange rounded-md shadow-sm text-center uppercase p-1 font-bold">{{visual.displayName}} {{'FARM_MAP.MAP_SUFFIX' | translate}}</h2>
+    @if (!popupMode) {
+    <a [routerLink]="['/map', visual.name]" class="border-brown border-2 rounded-full bg-orange text-brown px-3 py-1 text-xs uppercase whitespace-nowrap hover:bg-lightbrown transition-colors">
+        {{'FARM_MAP.VIEW_LARGE' | translate}}
+    </a>
+    }
+</div>
 
-<section class="relative bg-orange border-brown border-4 m-2">
+<p class="text-xs uppercase font-bold text-brown m-2 mb-0">{{'FARM_MAP.EXITS' | translate}}</p>
+<nav class="flex flex-wrap gap-1 m-2 mt-1">
+    @for (location of locationNames; track location) {
+    <a (click)="selectLocation(location)"
+        [class]="(location === visual.name ? 'bg-brown text-orange' : 'bg-orange text-brown') + ' border-brown border-2 rounded-full px-2 text-xs uppercase cursor-pointer hover:opacity-80 transition-colors'">
+        {{location}}
+    </a>
+    }
+</nav>
 
+<ng-template #mapCanvas>
+<section class="relative bg-orange border-brown border-4 overflow-hidden">
+
+    @if (visual.isFarm) {
     <img [src]="farmType" class="relative w-full h-auto pixelated">
+    } @else {
+    <div class="relative w-full pixelated" [style]="'aspect-ratio:' + canvasWidthTiles + '/' + canvasHeightTiles">
+        <div class="absolute inset-0" [style]="floorBackgroundStyle()"></div>
+        @if (!locationBackgroundFailed) {
+        <img class="absolute inset-0 w-full h-full pixelated" [src]="locationBackgroundUrl" [alt]="visual.name"
+            (load)="onLocationBackgroundLoad($event)" (error)="onLocationBackgroundError()">
+        }
+    </div>
+    }
 
     <!-- BUILDINGS -->
-    @for (building of buildings; track $index) {
-    <div class="absolute" [style]="calculatePosition(building.width, building.tileX, building.tileY)">
-        <img [src]="origin+'/assets/building/' + building.buildingType + '.png'" [alt]="building.buildingType"
-            [class]="'z-'+building.tileY+' absolute w-full h-auto pixelated bottom-0'">
+    @for (building of visual.buildings; track $index) {
+    <div class="absolute" [style.z-index]="building.tileY" [style]="calculatePosition(building.width, building.tileX, building.tileY)"
+        [class.cursor-pointer]="building.entryLocation" [class.hover:brightness-110]="building.entryLocation"
+        (click)="onBuildingClick(building)">
+        <div class="absolute inset-0 flex items-center justify-center text-[8px] text-brown"></div>
+        <img [src]="origin+'/assets/' + building.spriteType + '.png'" [alt]="building.spriteType"
+            (error)="onImageError($event)"
+            class="absolute w-full h-auto pixelated bottom-0">
     </div>
     }
 
     <!-- ITEMS -->
-    @for (item of items; track $index) {
-    <div [class]="'z-'+item.tileY+' absolute'" [style]="calculatePosition(item.width, item.tileX, item.tileY)">
-        <img [src]="origin+'/assets/item/' + item.buildingType + '.png'" [alt]="item.buildingType"
-            [class]="'z-'+item.tileY+' absolute w-full h-auto pixelated bottom-0'">
+    @for (item of visual.items; track $index) {
+    <div class="absolute" [style.z-index]="item.tileY" [style]="calculatePosition(item.width, item.tileX, item.tileY)">
+        <div class="absolute inset-0 flex items-center justify-center text-[8px] text-brown">?</div>
+        <img [src]="origin+'/assets/' + item.spriteType + '.png'" [alt]="item.spriteType"
+            (error)="onImageError($event)"
+            class="absolute w-full h-auto pixelated bottom-0">
+    </div>
+    }
+
+    <!-- CHESTS -->
+    @for (chest of visual.chests; track $index) {
+    <div [class]="'absolute cursor-pointer hover:brightness-110' + (chest.tileX === highlightX && chest.tileY === highlightY ? ' ring-4 ring-yellow-300 animate-pulse' : '')"
+        [style.z-index]="chest.tileY" [style]="calculatePosition(chest.width, chest.tileX, chest.tileY)" [title]="chestTitle(chest.items)"
+        (click)="onChestClick(chest)">
+        <img [src]="origin+'/assets/' + chest.spriteType + '.png'" [alt]="chest.spriteType"
+            class="absolute w-full h-auto pixelated bottom-0">
+        @if (chest.items.length > 0) {
+        <span class="absolute -top-1 -right-1 bg-brown text-orange text-[8px] leading-none px-[2px] rounded-full">{{chest.items.length}}</span>
+        }
     </div>
     }
 
     <!-- TERRAIN -->
-    @for (terrain of terrains; track $index) {
-    <div [class]="'z-'+terrain.tileY+' absolute'" [style]="calculatePosition(terrain.width, terrain.tileX, terrain.tileY)">
-        <img [src]="origin+'/assets/' + terrain.buildingType + '.png'" [alt]="terrain.buildingType"
-            [class]="'z-'+terrain.tileY+' absolute w-full h-auto pixelated bottom-0'">
+    @for (terrain of visual.terrains; track $index) {
+    <div class="absolute" [style.z-index]="terrain.tileY" [style]="calculatePosition(terrain.width, terrain.tileX, terrain.tileY)">
+        <img [src]="origin+'/assets/' + terrain.spriteType + '.png'" [alt]="terrain.spriteType"
+            (error)="onImageError($event)"
+            class="absolute w-full h-auto pixelated bottom-0">
     </div>
     }
 
+
 </section>
+</ng-template>
+
+@if (popupMode) {
+<div class="relative rounded-md border-brown border-4 overflow-hidden" style="height:min(65vh, 600px);">
+    <div class="absolute top-2 right-2 z-50 flex flex-col gap-1">
+        <button class="bg-brown text-orange rounded-md w-7 h-7 hover:opacity-80" (click)="pz.zoomIn()">+</button>
+        <button class="bg-brown text-orange rounded-md w-7 h-7 hover:opacity-80" (click)="pz.zoomOut()">−</button>
+        <button class="bg-brown text-orange rounded-md w-7 h-7 text-xs hover:opacity-80" (click)="pz.reset()">⟲</button>
+    </div>
+    <div class="w-full h-full overflow-hidden touch-none cursor-grab">
+        <div [appPanZoom]="popupMode" #pz="appPanZoom" class="origin-center w-full h-full">
+            <ng-container *ngTemplateOutlet="mapCanvas"></ng-container>
+        </div>
+    </div>
+</div>
+} @else {
+<div class="m-2">
+    <ng-container *ngTemplateOutlet="mapCanvas"></ng-container>
+</div>
+}

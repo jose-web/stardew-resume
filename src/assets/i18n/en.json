@@ -1,0 +1,64 @@
+{
+  "NAV": {
+    "GAME_INFO": "Home",
+    "SOCIAL": "Social",
+    "ITEMS": "Items"
+  },
+  "HEADER": {
+    "FARM_LABEL": "Farm",
+    "DATE": "Day {{day}} of {{season}}, year {{year}}",
+    "LANG_ES": "ES",
+    "LANG_EN": "EN"
+  },
+  "SEASON": {
+    "Spring": "Spring",
+    "Summer": "Summer",
+    "Fall": "Fall",
+    "Winter": "Winter"
+  },
+  "FILE_READER": {
+    "DRAG_DROP": "Drag & drop your farm file here",
+    "OR": "or",
+    "BROWSE": "browse file",
+    "FROM_DEVICE": "from device",
+    "ANOTHER_SAVE_PREFIX": "📁 Another save?",
+    "CHOOSE_FILE": "Choose a save file",
+    "LOAD_ANOTHER_TITLE": "Load another save"
+  },
+  "GAME_INFO": {
+    "QUESTS_TITLE": "📜 Quests",
+    "NO_QUESTS": "You have no active quests.",
+    "SOCIAL_TITLE": "👥 Social",
+    "VIEW_ALL": "View all",
+    "SEARCH_ITEMS": "🔎 Search items",
+    "NO_FRIENDS": "You haven't met anyone yet.",
+    "MAP_TITLE": "🗺️ Map",
+    "OPEN_FARM_MAP": "View farm map"
+  },
+  "SOCIAL": {
+    "TITLE": "Social",
+    "POINTS": "Points"
+  },
+  "FARM_MAP": {
+    "MAP_SUFFIX": "map",
+    "VIEW_LARGE": "View larger",
+    "EXITS": "Exits / other maps"
+  },
+  "CHEST": {
+    "TITLE": "Chest",
+    "EMPTY": "This chest is empty"
+  },
+  "ITEM_SEARCH": {
+    "TITLE": "Item search",
+    "PLACEHOLDER": "Search for an item... (e.g. wood)",
+    "TOTAL_PRE": "You have",
+    "TOTAL_POST": "in total.",
+    "NOT_FOUND": "That item wasn't found in your save."
+  },
+  "CONTAINER": {
+    "Inventario": "Inventory",
+    "Nevera": "Fridge",
+    "Cofre": "Chest",
+    "Suelo": "Ground"
+  }
+}

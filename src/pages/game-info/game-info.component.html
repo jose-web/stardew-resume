@@ -1,44 +1,70 @@
-<section class="grid grid-cols-2 gap-2 p-2">
-    <section class="bg-orange border-brown border-4 p-2">
-        <h2 class="underline">Missions</h2>
+<section class="grid grid-cols-1 md:grid-cols-2 gap-3 p-2">
 
-        @for (quest of quests; track $index) {
-        <article>
-            @if (quest.target){
-            <img class="w-7 h-7 pixelated" [src]="'https://upload.farm/static/assets/npc_icon/'+quest.target+'.png'"
-                alt="" [title]="quest.target" loading="lazy">
-            }
-            <p class="font-bold">{{quest._questTitle}}:</p>
-            <p> {{quest._questDescription}}</p>
-        </article>
-        }
-    </section>
+    <section class="bg-lightbrown border-brown border-4 rounded-lg shadow-md overflow-hidden">
+        <h2 class="m-0 p-2 bg-orange border-brown border-b-4 text-center uppercase font-bold">{{'GAME_INFO.QUESTS_TITLE' | translate}}</h2>
 
-    <section class="bg-orange border-brown border-4 p-2">
-        <a class="underline" routerLink="/social">Social</a>
-
-        <section class="grid grid-cols-3 gap-3">
-            @for (friend of social; track $index) {
-            <article class="flex">
-
-                <img class="w-7 h-7 pixelated"
-                    [src]="'https://upload.farm/static/assets/npc_icon/'+friend.key.string+'.png'" alt=""
-                    [title]="friend.key.string" loading="lazy">
-                <div class="flex flex-col">
-                    <p class="font-bold">{{friend.key.string}}</p>
-
-                    <p class="flex items-center">{{friend.value.Friendship.Points/274.9 | number:'1.0-0'}}/10 <img
-                            class="w-4 h-4 pixelated"
-                            src="https://stardewcommunitywiki.com/mediawiki/images/thumb/0/04/HeartIconLarge.png/18px-HeartIconLarge.png"
-                            alt=""></p>
-                    <!-- <p>{{friend.value.Friendship.Status}}</p>
-                    <p>Points: {{friend.value.Friendship.Points}}</p> -->
-
+        <div class="flex flex-col gap-2 p-2 max-h-96 overflow-y-auto">
+            @for (quest of quests; track $index) {
+            <article class="flex gap-2 bg-orange border-brown border-2 rounded-md p-2">
+                @if (quest.target){
+                <img class="w-8 h-8 pixelated shrink-0" [src]="'https://upload.farm/static/assets/npc_icon/'+quest.target+'.png'"
+                    alt="" [title]="quest.target" loading="lazy">
+                }
+                <div>
+                    <p class="font-bold">{{quest._questTitle}}</p>
+                    <p class="text-sm">{{quest._questDescription}}</p>
                 </div>
             </article>
+            } @empty {
+            <p class="text-center italic p-4">{{'GAME_INFO.NO_QUESTS' | translate}}</p>
+            }
+        </div>
+    </section>
+
+    <section class="bg-lightbrown border-brown border-4 rounded-lg shadow-md overflow-hidden">
+        <div class="flex items-center justify-between p-2 bg-orange border-brown border-b-4">
+            <h2 class="m-0 uppercase font-bold">{{'GAME_INFO.SOCIAL_TITLE' | translate}}</h2>
+            <nav class="flex gap-2 text-sm">
+                <a class="px-2 py-0.5 bg-brown text-orange rounded-full hover:opacity-80 transition-colors" routerLink="/social">{{'GAME_INFO.VIEW_ALL' | translate}}</a>
+                <a class="px-2 py-0.5 bg-brown text-orange rounded-full hover:opacity-80 transition-colors" routerLink="/items">{{'GAME_INFO.SEARCH_ITEMS' | translate}}</a>
+            </nav>
+        </div>
+
+        <section class="grid grid-cols-2 sm:grid-cols-3 gap-2 p-2 max-h-96 overflow-y-auto">
+            @for (friend of social; track $index) {
+            <article class="flex gap-2 bg-orange border-brown border-2 rounded-md p-1.5">
+                <img class="w-8 h-8 pixelated shrink-0"
+                    [src]="'https://upload.farm/static/assets/npc_icon/'+friend.key.string+'.png'" alt=""
+                    [title]="friend.key.string" loading="lazy">
+                <div class="flex flex-col min-w-0">
+                    <p class="font-bold truncate">{{friend.key.string}}</p>
+
+                    <div class="flex items-center gap-1">
+                        <img class="w-3 h-3 pixelated shrink-0"
+                            src="https://stardewcommunitywiki.com/mediawiki/images/thumb/0/04/HeartIconLarge.png/18px-HeartIconLarge.png"
+                            alt="">
+                        <div class="flex-1 h-2 bg-brown/30 rounded-full overflow-hidden">
+                            <div class="h-full bg-brown" [style.width.%]="friend.value.Friendship.Points/274.9*10"></div>
+                        </div>
+                        <span class="text-xs">{{friend.value.Friendship.Points/274.9 | number:'1.0-0'}}/10</span>
+                    </div>
+                </div>
+            </article>
+            } @empty {
+            <p class="col-span-full text-center italic p-4">{{'GAME_INFO.NO_FRIENDS' | translate}}</p>
             }
         </section>
     </section>
 </section>
 
-<app-farm-map></app-farm-map>
+<section class="bg-lightbrown border-brown border-4 rounded-lg shadow-md overflow-hidden m-2">
+    <div class="flex items-center justify-between p-2 bg-orange border-brown border-b-4">
+        <h2 class="m-0 uppercase font-bold">{{'GAME_INFO.MAP_TITLE' | translate}}</h2>
+    </div>
+
+    <div class="flex items-center justify-center p-4">
+        <button class="flex items-center gap-2 bg-brown text-orange rounded-full px-4 py-2 hover:opacity-80 transition" (click)="openFarmMap()">
+            🗺️ {{'GAME_INFO.OPEN_FARM_MAP' | translate}}
+        </button>
+    </div>
+</section>

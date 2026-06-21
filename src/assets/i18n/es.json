@@ -1,0 +1,64 @@
+{
+  "NAV": {
+    "GAME_INFO": "Inicio",
+    "SOCIAL": "Social",
+    "ITEMS": "Objetos"
+  },
+  "HEADER": {
+    "FARM_LABEL": "Granja",
+    "DATE": "{{day}} de {{season}} del año {{year}}",
+    "LANG_ES": "ES",
+    "LANG_EN": "EN"
+  },
+  "SEASON": {
+    "Spring": "Primavera",
+    "Summer": "Verano",
+    "Fall": "Otoño",
+    "Winter": "Invierno"
+  },
+  "FILE_READER": {
+    "DRAG_DROP": "Arrastrá y soltá el archivo de tu granja aquí",
+    "OR": "o",
+    "BROWSE": "buscá el archivo",
+    "FROM_DEVICE": "desde tu dispositivo",
+    "ANOTHER_SAVE_PREFIX": "📁 ¿Otra partida?",
+    "CHOOSE_FILE": "Elegí un archivo de guardado",
+    "LOAD_ANOTHER_TITLE": "Cargar otra partida"
+  },
+  "GAME_INFO": {
+    "QUESTS_TITLE": "📜 Misiones",
+    "NO_QUESTS": "No tenés misiones activas.",
+    "SOCIAL_TITLE": "👥 Social",
+    "VIEW_ALL": "Ver todos",
+    "SEARCH_ITEMS": "🔎 Buscar objetos",
+    "NO_FRIENDS": "Todavía no conociste a nadie.",
+    "MAP_TITLE": "🗺️ Mapa",
+    "OPEN_FARM_MAP": "Ver mapa de la granja"
+  },
+  "SOCIAL": {
+    "TITLE": "Social",
+    "POINTS": "Puntos"
+  },
+  "FARM_MAP": {
+    "MAP_SUFFIX": "mapa",
+    "VIEW_LARGE": "Ver en grande",
+    "EXITS": "Salidas / otros mapas"
+  },
+  "CHEST": {
+    "TITLE": "Cofre",
+    "EMPTY": "El cofre está vacío"
+  },
+  "ITEM_SEARCH": {
+    "TITLE": "Buscador de objetos",
+    "PLACEHOLDER": "Buscar un objeto... (ej. madera)",
+    "TOTAL_PRE": "Tenés",
+    "TOTAL_POST": "en total.",
+    "NOT_FOUND": "No se encontró ese objeto en tu partida."
+  },
+  "CONTAINER": {
+    "Inventario": "Inventario",
+    "Nevera": "Nevera",
+    "Cofre": "Cofre",
+    "Suelo": "Suelo"
+  }
+}

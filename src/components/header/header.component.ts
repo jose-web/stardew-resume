@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { SaveGame, TentacledItem } from '../../type/SaveGame';
+import { TranslateService } from '@ngx-translate/core';
+import { SaveGame } from '../../type/SaveGame';
+
+const LANG_STORAGE_KEY = 'lang';
 
 @Component({
   selector: 'app-header',
@@ -27,10 +30,20 @@ export class HeaderComponent {
 
   constructor(
     private router: Router,
-  ) { }
+    public translate: TranslateService,
+  ) {
+    const stored = localStorage.getItem(LANG_STORAGE_KEY);
+    const lang = stored ?? 'es';
+    this.translate.addLangs(['es', 'en']);
+    this.translate.setFallbackLang('es');
+    this.translate.use(lang);
+  }
 
   ngOnInit() {
-    let info: SaveGame = JSON.parse(sessionStorage.getItem("saveGames")!).SaveGame
+    const raw = sessionStorage.getItem("saveGames");
+    if (!raw) return;
+
+    let info: SaveGame = JSON.parse(raw).SaveGame
     this.farmName = info.player.farmName
     this.username = info.player.name
     this.money = Number(info.player.money)
@@ -38,5 +51,10 @@ export class HeaderComponent {
     this.time.season = Number(info.player.seasonForSaveGame)
     this.time.year = Number(info.player.yearForSaveGame)
     this.goldenWalnuts = Number(info.goldenWalnuts)
+  }
+
+  setLang(lang: string) {
+    this.translate.use(lang);
+    localStorage.setItem(LANG_STORAGE_KEY, lang);
   }
 }
